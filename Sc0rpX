@@ -1,0 +1,31 @@
+#!/bin/bash
+
+PATH="/data/data/com.termux/files/usr/bin"
+
+if [ ! -x ${PATH}/curl ]; then
+       pkg install curl -y
+fi
+
+if [ ! -x ${PATH}/figlet ]; then
+    pkg install figlet -y
+fi
+#Figlet
+figlet Sc0rpX 
+
+echo "[+]Enviar mensaje anonimo"
+echo "[+]Solo para termux"
+
+echo -e -n  "
+
+ejemplo: +55555555
+numero de la persona que desea enviar
+"
+read -r phone
+
+echo "mensaje que desea enviar con ese numero"
+read -r mensaje
+
+curl -X POST https://textbelt.com/text \
+       --data-urlencode phone=${phone} \
+       --data-urlencode message=${mensaje} \
+       -d key=textbelt
